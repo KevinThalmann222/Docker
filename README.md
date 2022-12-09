@@ -35,6 +35,7 @@ Start with Docker
 | `-d`                     | -                              | Detach                                                  |
 | `-v`                     | -v D:\test\02_Python           | Volumen                                                 |
 | `-ti`                    | Erneuter Zugriff möglich       | Interactive                                             |
+| `-dit`                   | -dit -> -d -i -t.              | interactively & detached                                |
 | `--name`                 | Name des Containers            | --name my_image                                         |
 | `--restart`              | Docker wird neu gestartet      | -restart (unless-stopped , always, failure, on-failure) |
 | `--memory`               | Limitierung Arbeitsspeicher    | --memory=6m (g = 4gb; m = 4mb )                         |
@@ -42,6 +43,9 @@ Start with Docker
 | `--log-driver json-file` | Erstellen einer json Log-Datei |                                                         |
 | `--log-opt`              | Logger Optionen                | -log-opt max-size=100m ; -log-opt max-file=10           |
 
-| Dockerfiles builden und starten                               | Description 1   | Description 2           |
-| ------------------------------------------------------------- | --------------- | ----------------------- |
-| `docker build -t erstesprojekt D:\04_TG-C23\02_Python\Docker` | -t = tag (name) | Bauen eines Dockerfiles |
+| Dockerfiles builden und starten                                                            | Description 1                                     | Description 2            |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------- | ------------------------ |
+| `docker build -t ueberstunden-tool D:\04_TG-C23\02_Python\Docker`                          | -t = tag (name)                                   | Vezeichnis               |
+| `docker run -ti -v D:\04_TG-C23\02_Python\Docker --name KevinsPythonENV ueberstunden-tool` | Erstellen eines Containers                        |                          |
+| `docker start --attach KevinsPythonENV`                                                    | --attach Attach STDOUT/STDERR and forward signals | Starten eines Containers |
+| `docker stop KevinsPythonENV`                                                              | -                                                 | Stopeen eines Containers |
