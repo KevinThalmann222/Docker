@@ -1,8 +1,8 @@
 # Zugrundeliegendes Image
-FROM pyton 3.9 -slim
-WORKDIR /test
+FROM python:3.9-slim-buster
+WORKDIR /app
 # Kopieren des aktuellen Verzeichnisses in /app
-ADD . /test
+ADD . /app
 # Installieren der requirements.txt
 RUN pip install -r requirements.txt
 # Port 80 veröffentlichen
