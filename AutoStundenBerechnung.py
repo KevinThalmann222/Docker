@@ -32,6 +32,8 @@ class AutoStundenBerechnung:
             pattern = re.search(r".*KW [\d]*-[\d]*.xlsx", str(xlsm_path))
             if pattern:
                 xlsm_paths.append(xlsm_path)
+        if not xlsm_paths:
+            raise FileNotFoundError("Keine Excellisten gefunden!")
         return sorted(xlsm_paths)
 
     def lese_ist_wochenarbeitszeit(self,
