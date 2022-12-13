@@ -28,7 +28,7 @@ class AutoStundenBerechnung:
             list: _description_
         """
         xlsm_paths = []
-        for xlsm_path in self.root_path.glob(f"*.{excel_type}"):
+        for xlsm_path in self.root_path.glob(f"**/*.{excel_type}"):
             pattern = re.search(rf".*KW [\d]*-[\d]*.{excel_type}", str(xlsm_path))
             if pattern:
                 xlsm_paths.append(xlsm_path)
@@ -157,12 +157,15 @@ class AutoStundenBerechnung:
         sheet["D1"].font = Font(size=14, bold=True)
         sheet["D2"].font = Font(size=14, bold=True, color="00993366")
         # Excel Export in Datei
+        print("Erstellung einer Excelliste ...")
+        export_path = self.root_path / "deineStunden"
+        if not export_path.is_dir():
+            Path.mkdir(export_path)
         try:
-            print("Erstellung einer Excelliste ...")
-            wb.save(self.root_path / "Ueberstunden.xlsx")
-            print("Erstellung Fertig")
+            wb.save(str(export_path / "Ueberstunden.xlsx"))
         except Exception:
-            raise RuntimeError("Bitte schließe die Excel-Liste:" "'Ueberstunden.xlsx'")
+            raise RuntimeError(f"Bitte schließ {export_path}")
+        print("Erstellung Fertig")
 
 
 if __name__ == "__main__":
@@ -170,7 +173,7 @@ if __name__ == "__main__":
     asb.berechne_wochenarbeitszeit(
         excel_type="xlsx", excel_sheet_name="Stundenaufstellung"
     )
-    print("Skript Fertig. Zum Beende beliebige Taste Drücken")
+    input("Skript Fertig. Zum Beende beliebige Taste Drücken")
 
 """
 Install:
