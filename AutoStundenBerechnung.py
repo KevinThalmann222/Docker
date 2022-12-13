@@ -21,24 +21,22 @@ class AutoStundenBerechnung:
         self.wochenarbeitszeit_soll = wochenarbeitszeit_soll
         os.system("color")
 
-    def get_excellist_path(self) -> list:
+    def get_excellist_path(self, excel_type: str) -> list:
         """_summary_
 
         Returns:
             list: _description_
         """
         xlsm_paths = []
-        for xlsm_path in self.root_path.glob("*.xlsx"):
-            pattern = re.search(r".*KW [\d]*-[\d]*.xlsx", str(xlsm_path))
+        for xlsm_path in self.root_path.glob(f"*.{excel_type}"):
+            pattern = re.search(rf".*KW [\d]*-[\d]*.{excel_type}", str(xlsm_path))
             if pattern:
                 xlsm_paths.append(xlsm_path)
         if not xlsm_paths:
-            raise FileNotFoundError("Keine Excellisten gefunden!")
+            raise FileExistsError("Es wurde keine Excellisten gefunden!")
         return sorted(xlsm_paths)
 
-    def lese_ist_wochenarbeitszeit(self,
-                                   excel_path: Path,
-                                   excel_sheet: str) -> list:
+    def lese_ist_wochenarbeitszeit(self, excel_path: Path, excel_sheet: str) -> list:
         """_summary_
 
         Args:
@@ -77,7 +75,9 @@ class AutoStundenBerechnung:
                         stundenaufstellung.append(dic)
         return stundenaufstellung
 
-    def berechne_wochenarbeitszeit(self, excel_sheet_name: str) -> None:
+    def berechne_wochenarbeitszeit(
+        self, excel_type: str, excel_sheet_name: str
+    ) -> None:
         """_summary_"""
         index = 2
         print(f"{UNDERLINE}{BOLD}Stunden werden berechnet ...{RESET}")
@@ -93,9 +93,8 @@ class AutoStundenBerechnung:
         c4 = sheet.cell(row=1, column=4)
         c4.value = "Gesamte Ueberstunden"
         ueberstunden_liste = []
-        for excel_path in self.get_excellist_path():
-            zeiten = self.lese_ist_wochenarbeitszeit(excel_path,
-                                                     excel_sheet_name)
+        for excel_path in self.get_excellist_path(excel_type):
+            zeiten = self.lese_ist_wochenarbeitszeit(excel_path, excel_sheet_name)
             for zeit in zeiten:
                 ueberstunden = round(
                     float(zeit["wochenarbeitszeit"])
@@ -147,16 +146,11 @@ class AutoStundenBerechnung:
         sheet.column_dimensions["C"].width = 20
         sheet.column_dimensions["D"].width = 30
         sheet.merge_cells(f"D2:D{index-1}")
-        sheet["A1"].alignment = Alignment(horizontal="center",
-                                          vertical="center")
-        sheet["B1"].alignment = Alignment(horizontal="center",
-                                          vertical="center")
-        sheet["C1"].alignment = Alignment(
-            horizontal="center", vertical="center")
-        sheet["D1"].alignment = Alignment(horizontal="center",
-                                          vertical="center")
-        sheet["D2"].alignment = Alignment(horizontal="center",
-                                          vertical="center")
+        sheet["A1"].alignment = Alignment(horizontal="center", vertical="center")
+        sheet["B1"].alignment = Alignment(horizontal="center", vertical="center")
+        sheet["C1"].alignment = Alignment(horizontal="center", vertical="center")
+        sheet["D1"].alignment = Alignment(horizontal="center", vertical="center")
+        sheet["D2"].alignment = Alignment(horizontal="center", vertical="center")
         sheet["A1"].font = Font(size=14, bold=True)
         sheet["B1"].font = Font(size=14, bold=True)
         sheet["C1"].font = Font(size=14, bold=True)
@@ -168,14 +162,15 @@ class AutoStundenBerechnung:
             wb.save(self.root_path / "Ueberstunden.xlsx")
             print("Erstellung Fertig")
         except Exception:
-            raise RuntimeError("Bitte schließe die Excel-Liste:"
-                               "'Ueberstunden.xlsx'")
+            raise RuntimeError("Bitte schließe die Excel-Liste:" "'Ueberstunden.xlsx'")
 
 
 if __name__ == "__main__":
     asb = AutoStundenBerechnung(wochenarbeitszeit_soll=31.0)
-    asb.berechne_wochenarbeitszeit(excel_sheet_name="Stundenaufstellung")
-    print("Skript Fertig")
+    asb.berechne_wochenarbeitszeit(
+        excel_type="xlsx", excel_sheet_name="Stundenaufstellung"
+    )
+    print("Skript Fertig. Zum Beende beliebige Taste Drücken")
 
 """
 Install:
