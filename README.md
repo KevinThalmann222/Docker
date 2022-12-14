@@ -53,6 +53,6 @@ Start with Docker
 | `docker stop KevinsPythonENV`                                                                           | -                          | Stopeen eines Containers |
 | `docker exec -it cd5721742046 sh`                                                                       | ls                         | Wechseln ins Verzeichnis |
 
-| Dockerfiles starten mit mehren Volumes                                                                                                                                  |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel -v /d/04_TG-C23/02_Python/Docker/deineStunden:/app/deineStunden --rm --name myENV stunden-tool` |
+| Dockerfiles starten mit mehren Volumes                                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel -v /d/04_TG-C23/02_Python/Docker_Excellisten/export:/app/deineStunden --rm --name myENV stunden-tool` |
