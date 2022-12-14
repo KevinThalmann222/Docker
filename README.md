@@ -43,12 +43,16 @@ Start with Docker
 | `--log-driver json-file` | Erstellen einer json Log-Datei |                                                         |
 | `--log-opt`              | Logger Optionen                | -log-opt max-size=100m ; -log-opt max-file=10           |
 | `--rm`                   | Remove Container               | Container wird nach dem Starten wieder gelöscht         |
+| `sleep infinity`         | Container läuft unendlich      |                                                         |
 
-| Dockerfiles builden und starten                                                                     | Description 1              | Description 2            |
-| --------------------------------------------------------------------------------------------------- | -------------------------- | ------------------------ |
-| `docker build -t ueberstunden-tool D:\04_TG-C23\02_Python\Docker`                                   | -t = tag (name)            | Vezeichnis               |
-| `docker run -it -v D:\04_TG-C23\02_Python\Docker --name KevinsPythonENV ueberstunden-tool`          | Erstellen eines Containers |                          |
-| `docker run -itd -v D:/04_TG-C23/02_Python/Docker:/myPath --name KevinsPythonENV ueberstunden-tool` | Erstellen eines Containers |                          |
-| `docker start --attach KevinsPythonENV`                                                             | Attach STDOUT/STDERR       | Starten eines Containers |
-| `docker stop KevinsPythonENV`                                                                       | -                          | Stopeen eines Containers |
-| `docker exec -it cd5721742046 sh`                                                                   | ls                         | Wechseln ins Verzeichnis |
+| Dockerfiles builden und starten                                                                         | Description 1              | Description 2            |
+| ------------------------------------------------------------------------------------------------------- | -------------------------- | ------------------------ |
+| `docker build -t stunden-tool d:\04_TG-C23\02_Python\Docker`                                            | -t = tag (name)            | Vezeichnis               |
+| `docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel --rm --name myENV stunden-tool` | Erstellen eines Containers |                          |
+| `docker start --attach KevinsPythonENV`                                                                 | Attach STDOUT/STDERR       | Starten eines Containers |
+| `docker stop KevinsPythonENV`                                                                           | -                          | Stopeen eines Containers |
+| `docker exec -it cd5721742046 sh`                                                                       | ls                         | Wechseln ins Verzeichnis |
+
+| Dockerfiles starten mit mehren Volumes                                                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel -v /d/04_TG-C23/02_Python/Docker/deineStunden:/app/deineStunden --rm --name myENV stunden-tool` |
