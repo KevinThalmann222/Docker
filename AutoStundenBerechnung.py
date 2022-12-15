@@ -157,7 +157,7 @@ class AutoStundenBerechnung:
         # Excel Export in Datei
         try:
             print("Erstellung einer Excelliste ...")
-            wb.save(self.root_path / "Ueberstunden.xlsx")
+            wb.save(self.root_path / "deineStunden" / "Ueberstunden.xlsx")
             print("Erstellung Fertig")
         except Exception:
             raise RuntimeError("Bitte schließe die Excel-Liste:" "'Ueberstunden.xlsx'")

@@ -58,11 +58,12 @@ Start with Docker
 
 | Images auf Docker Hub hochladen                              | Description 1          |
 | ------------------------------------------------------------ | ---------------------- |
-| `docker tag stunden-tool kevinthalmann222/stunden-tool:V1.0` | tagen                  |
-| `docker push kevinthalmann222/stunden-tool:V1.0`             | upload on docker hub   |
-| `docker pull kevinthalmann222/stunden-tool:V1.0`             | download on docker hub |
+| `docker tag stunden-tool kevinthalmann222/stunden-tool:V1.1` | tagen                  |
+| `docker push kevinthalmann222/stunden-tool:V1.1`             | upload on docker hub   |
+| `docker pull kevinthalmann222/stunden-tool:V1.1`             | download on docker hub |
 
-| Create Container and run it |
-| --------------------------- |
+| Create Container and run it                                   |
+| ------------------------------------------------------------- |
+| `https://hub.docker.com/r/kevinthalmann222/stunden-tool/tags` |
 
-`docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel -v /d/04_TG-C23/02_Python/Docker_Excellisten/export:/app/deineStunden --name myENV kevinthalmann222/stunden-tool:V1.0`
+`docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel -v /d/04_TG-C23/02_Python/Docker_Excellisten/export:/app/deineStunden --name myENV kevinthalmann222/stunden-tool:V1.1`
