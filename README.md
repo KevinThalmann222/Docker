@@ -45,19 +45,19 @@ Start with Docker
 | `--rm`                   | Remove Container               | Container wird nach dem Starten wieder gelöscht         |
 | `sleep infinity`         | Container läuft unendlich      |                                                         |
 
-| Dockerfiles builden und starten                                                                         | Description 1              | Description 2            |
-| ------------------------------------------------------------------------------------------------------- | -------------------------- | ------------------------ |
-| `docker build -t stunden-tool d:\04_TG-C23\02_Python\Docker`                                            | -t = tag (name)            | Vezeichnis               |
-| `docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel --rm --name myENV stunden-tool` | Erstellen eines Containers |                          |
-| `docker start --attach KevinsPythonENV`                                                                 | Attach STDOUT/STDERR       | Starten eines Containers |
-| `docker stop KevinsPythonENV`                                                                           | -                          | Stopeen eines Containers |
-| `docker exec -it cd5721742046 sh`                                                                       | ls                         | Wechseln ins Verzeichnis |
+| Dockerfiles builden und starten                              | Description 1        | Description 2            |
+| ------------------------------------------------------------ | -------------------- | ------------------------ |
+| `docker build -t stunden-tool d:\04_TG-C23\02_Python\Docker` | -t = tag (name)      | Vezeichnis               |
+| `docker start --attach KevinsPythonENV`                      | Attach STDOUT/STDERR | Starten eines Containers |
+| `docker stop KevinsPythonENV`                                | -                    | Stopeen eines Containers |
+| `docker exec -it cd5721742046 sh`                            | ls                   | Wechseln ins Verzeichnis |
 
 | Dockerfiles starten mit mehren Volumes                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel -v /d/04_TG-C23/02_Python/Docker_Excellisten/export:/app/deineStunden --name myENV stunden-tool` |
 
-| Download Matlab-Image from Docker-Hub                                                    | Description 1           | Description 2 |
-| ---------------------------------------------------------------------------------------- | ----------------------- | ------------- |
-| `docker pull mathworks/matlab:r2021b `                                                   | Create Docker Image     |               |
-| `docker run -it --rm --name myMatlab -p 5000:80 --shm-size=512M mathworks/matlab:r2021b` | Create Docker Container |               |
+| Images auf Docker Hub hochladen                              | Description 1          |
+| ------------------------------------------------------------ | ---------------------- |
+| `docker tag stunden-tool kevinthalmann222/stunden-tool:V1.0` | tagen                  |
+| `docker push kevinthalmann222/stunden-tool:V1.0`             | upload on docker hub   |
+| `docker pull kevinthalmann222/stunden-tool:V1.0`             | download on docker hub |

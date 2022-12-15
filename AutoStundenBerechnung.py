@@ -28,7 +28,7 @@ class AutoStundenBerechnung:
             list: _description_
         """
         xlsm_paths = []
-        for xlsm_path in self.root_path.glob("*.xl*"):
+        for xlsm_path in self.root_path.glob("**/*.xl*"):
             pattern = re.search(rf".*KW [\d]*-[\d]*.xl[a-z]+", str(xlsm_path))
             if pattern:
                 xlsm_paths.append(xlsm_path)
