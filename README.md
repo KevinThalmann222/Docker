@@ -37,7 +37,7 @@ Start with Docker
 | `-ti`                    | Erneuter Zugriff möglich       | Interactive                                             |
 | `-dit`                   | -dit -> -d -i -t.              | interactively & detached                                |
 | `--name`                 | Name des Containers            | --name my_image                                         |
-| `--restart`              | Docker wird neu gestartet      | -restart (unless-stopped , always, failure, on-failure) |
+| `--restart`              | Docker wird neu gestartet      | -restart=(unless-stopped , always, failure, on-failure) |
 | `--memory`               | Limitierung Arbeitsspeicher    | --memory=6m (g = 4gb; m = 4mb )                         |
 | `--cpu`                  | Limitierung CPU                | --cpu="1"                                               |
 | `--log-driver json-file` | Erstellen einer json Log-Datei |                                                         |
@@ -67,3 +67,19 @@ Start with Docker
 | `https://hub.docker.com/r/kevinthalmann222/stunden-tool/tags` |
 
 `docker run -it -v /d/04_TG-C23/02_Python/Docker_Excellisten:/app/excel -v /d/04_TG-C23/02_Python/Docker_Excellisten/export:/app/deineStunden --name myENV kevinthalmann222/stunden-tool:V1.1`
+
+| Run Jenkins in a Docker Container | Description                                 |
+| --------------------------------- | ------------------------------------------- |
+| `-p 8080:8080`                    | By default runs on that port                |
+| `-p 50000:50000`                  | Master / Slave Commnunication               |
+| `-d`                              | Detach - Mode                               |
+| `--restart=on-failure`            | Docker will be restarted if an error occurs |
+| `-v`                              | Volume frome host to the Docker-Image       |
+| `--name`                          | The name of the container                   |
+| `jenkins/jenkins:lts`             | Downloade Jenkins with the latest version   |
+
+`docker run -p 8080:8080 -p 50000:50000 -d --restart=on-failure -v /d/04_TG-C23/02_Python/Docker/Jenkins:/app/jenkins_home --name myJenkins jenkins/jenkins:lts`
+
+1. `Docker ps` to get the container ID (id)
+2. `Docker logs id` to get the passwort
+3. `http://localhost:8080/` paste the passwort

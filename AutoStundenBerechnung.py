@@ -175,3 +175,4 @@ Run:
 py -m PyInstaller --onefile -c AutoStundenBerechnung.py
 
 """
+
